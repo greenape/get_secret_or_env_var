@@ -1,4 +1,4 @@
-# _get_secret_or_env_var
+# get_secret_or_env_var
 
 [![CircleCI](https://img.shields.io/circleci/build/gh/greenape/get_secret_or_env_var.svg?logo=CircleCI&style=flat-square)](https://circleci.com/gh/greenape/get_secret_or_env_var) [![codecov](https://img.shields.io/codecov/c/github/greenape/get_secret_or_env_var.svg?logo=Codecov&style=flat-square)](https://codecov.io/gh/greenape/get_secret_or_env_var)  [![License: MIT](https://img.shields.io/github/license/greenape/get_secret_or_env_var.svg?style=flat-square)](https://opensource.org/licenses/MIT) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square)](https://github.com/python/black)
 
