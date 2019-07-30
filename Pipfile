@@ -6,7 +6,7 @@ verify_ssl = true
 [dev-packages]
 pytest = "*"
 pytest-cov = "*"
-get_secret_env_var = {path = "."}
+get-secret-or-env-var = {path = ".", editable=true}
 
 [packages]
 

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "4f8ce851f3a4b790b84df9346a55121f04ad7a39ec9996b1840ea2cae9399c4f"
+            "sha256": "c4037d3b0b563733084ce8b33eb3b4ffad35639181b4e2cb7da7292c057772a1"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -68,7 +68,8 @@
             ],
             "version": "==4.5.4"
         },
-        "get-secret-env-var": {
+        "get-secret-or-env-var": {
+            "editable": true,
             "path": "."
         },
         "importlib-metadata": {
