@@ -34,7 +34,46 @@ jobs:
           command: bash <(curl -s https://codecov.io/bash) -F flowmachine_unit_tests
           when: always
 
+  build_wheel:
+    docker:
+      - image: circleci/python:3.7
+    steps:
+      - checkout
+      - run:
+          name: Building wheel
+          command: python setup.py bdist_wheel
+      - persist_to_workspace:
+          root: /home/circleci/project
+          paths:
+            - dist
+      - store_artifacts:
+          path: /home/circleci/project/dist
+          destination: wheel
+
+  push_wheel:
+    docker:
+      - image: circleci/python:3.7
+    steps:
+      - attach_workspace:
+          at: /home/circleci/
+      - run:
+          name: Upload Wheel
+          command: |
+            pipenv install twine
+            pipenv run twine upload /home/circleci/dist/*
+
 workflows:
   run_build_pipeline:
     jobs:
       - run_tests
+      - build_wheel
+      - push_wheel:
+          requires:
+            - run_tests
+            - build_wheel
+          context: org-global
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /.*/
