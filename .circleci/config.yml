@@ -3,7 +3,6 @@ jobs:
   run_tests:
     docker:
       - image: circleci/python:3.7
-
     steps:
       - checkout
       - restore_cache:
@@ -17,7 +16,6 @@ jobs:
           paths:
             - /home/circleci/.local/share/virtualenvs
           key: v1-dependencies-{{ checksum "Pipfile.lock" }}
-
       - run:
           name: Run tests
           command: |
@@ -25,14 +23,32 @@ jobs:
             --junit-xml=test_results/pytest/results.xml \
             --cov-report xml \
             --cov-report term
-
       - store_test_results:
           path: test_results
-
       - run:
           name: Upload coverage
           command: bash <(curl -s https://codecov.io/bash) -F flowmachine_unit_tests
           when: always
+
+  lint:
+    docker:
+      - image: circleci/python:3.7
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Pipfile.lock" }}
+      - run:
+          name: Install dependencies
+          command: |
+            pipenv install --deploy --dev
+      - save_cache:
+          paths:
+            - /home/circleci/.local/share/virtualenvs
+          key: v1-dependencies-{{ checksum "Pipfile.lock" }}
+      - run:
+          name: Lint
+          command: pipenv run black --check .
 
   build_wheel:
     docker:
@@ -67,10 +83,12 @@ workflows:
     jobs:
       - run_tests
       - build_wheel
+      - lint
       - push_wheel:
           requires:
             - run_tests
             - build_wheel
+            - lint
           context: org-global
           filters:
             branches:
