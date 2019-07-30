@@ -1,0 +1,40 @@
+version: 2.1
+jobs:
+  run_tests:
+    docker:
+      - image: circleci/python:3.7
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Pipfile.lock" }}
+      - run:
+          name: Install dependencies
+          command: |
+            pipenv install --deploy --dev
+      - save_cache:
+          paths:
+            - /home/circleci/.local/share/virtualenvs
+          key: v1-dependencies-{{ checksum "Pipfile.lock" }}
+
+      - run:
+          name: Run tests
+          command: |
+           pipenv run pytest \
+            --junit-xml=test_results/pytest/results.xml \
+            --cov-report xml \
+            --cov-report term
+
+      - store_test_results:
+          path: test_results
+
+      - run:
+          name: Upload coverage
+          command: bash <(curl -s https://codecov.io/bash) -F flowmachine_unit_tests
+          when: always
+
+workflows:
+  run_build_pipeline:
+    jobs:
+      - run_tests
