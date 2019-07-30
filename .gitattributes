@@ -1,2 +1,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+_get_secret_or_env_var/_version.py export-subst
+get_secret_or_env_var/_version.py export-subst

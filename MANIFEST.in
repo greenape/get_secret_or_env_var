@@ -1,0 +1,2 @@
+include versioneer.py
+include get_secret_or_env_var/_version.py
