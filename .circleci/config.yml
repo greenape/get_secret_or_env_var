@@ -81,9 +81,18 @@ jobs:
 workflows:
   run_build_pipeline:
     jobs:
-      - run_tests
-      - build_wheel
-      - lint
+      - run_tests:
+          filters:
+            tags:
+              only: /.*/
+      - build_wheel:
+          filters:
+            tags:
+              only: /.*/
+      - lint:
+          filters:
+            tags:
+              only: /.*/
       - push_wheel:
           requires:
             - run_tests
