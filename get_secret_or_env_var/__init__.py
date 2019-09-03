@@ -67,10 +67,11 @@ class _DockerSecretsDict:
             item = item.decode()
         except AttributeError:
             pass  # Not bytes
-        try:
+        secrets_path = DOCKER_SECRETS_PATH / item
+        if secrets_path.exists():
             with open(DOCKER_SECRETS_PATH / item, self.mode) as fin:
                 return fin.read().strip()
-        except FileNotFoundError:
+        else:
             raise KeyError
 
 
