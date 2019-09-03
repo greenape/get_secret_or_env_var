@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Removed
 
+## [0.0.2]
+
+### Fixed
+
+- Fixed Python 3.5 compatibility thanks to [@maxalbert](https://github.com/maxalbert) 
 
 ## [0.0.1]
 
@@ -31,5 +36,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
 
-[unreleased]: https://github.com/Flowminder/FlowKit/compare/0.0.1...master
+[unreleased]: https://github.com/Flowminder/FlowKit/compare/0.0.2...master
+[0.0.1]: https://github.com/Flowminder/FlowKit/compare/0.0.1...0.0.2
 [0.0.1]: https://github.com/Flowminder/FlowKit/compare/30ec49d...0.0.1
