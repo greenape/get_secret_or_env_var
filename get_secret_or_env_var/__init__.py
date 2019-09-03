@@ -59,7 +59,9 @@ def _get_secret_or_env_varb(key: bytes, default: Optional[bytes] = None) -> byte
 class _DockerSecretsDict:
     def __init__(self, *, mode):
         if mode not in ("r", "rb"):
-            raise ValueError("Mode must be one of 'r' or 'rb', but got {}.".format(mode))
+            raise ValueError(
+                "Mode must be one of 'r' or 'rb', but got {}.".format(mode)
+            )
         self.mode = mode
 
     def __getitem__(self, item: Union[bytes, str]) -> Union[bytes, str]:
